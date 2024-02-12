@@ -1,9 +1,11 @@
 import RadiosInput from './RadiosInput';
+
+import { useState } from 'react';
+
 const id = 'radiosInput';
 const handleChange = (item) => {
   return { id: id | undefined, value: item };
 };
-let defaultVal = { label: 'Option 1', value: 'option1' };
 
 export default {
   title: 'Components/inputs/RadiosInput',
@@ -129,14 +131,27 @@ export default {
   },
 };
 
-export const Default = {
-  args: {
-    items: [
-      { label: 'Option 1', value: 'option1' },
-      { label: 'Option 2', value: 'option2' },
-      { label: 'Option 3', value: 'option3' },
-    ],
-    value: defaultVal,
-    onChange: (item) => (defaultVal = item),
-  },
+export const Default = (args) => {
+  const [value, setValue] = useState(args.value);
+
+  const onChange = (item) => setValue(item.value);
+
+  return (
+    <RadiosInput
+      onChange={onChange}
+      items={Default?.args?.items}
+      value={value}
+    />
+  );
+};
+
+Default.args = {
+  id: 'default',
+  items: [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+  ],
+  value: 'option1',
+  onChange: (item) => Default.onChange(item),
 };

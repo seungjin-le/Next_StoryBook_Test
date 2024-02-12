@@ -14,7 +14,6 @@ const RadiosInput = ({
   id,
   ...props
 }) => {
-  console.log(value);
   return (
     <div
       style={{
@@ -25,7 +24,7 @@ const RadiosInput = ({
         fontWeight: fontWeight || 500,
       }}
       className={'flex  items-center justify-start'}>
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <div
           key={index}
           style={{
@@ -34,8 +33,8 @@ const RadiosInput = ({
           className={'flex flex-row items-center justify-start'}>
           <input
             type="radio"
-            onChange={() => onChange({ id, value: item.value })}
-            checked={value.value === item.value || value === item.value}
+            onChange={() => onChange({ id, value: item })}
+            checked={value?.value === item.value || value === item.value}
             id={item.label}
           />
           <label htmlFor={item.label}>{item.label}</label>
